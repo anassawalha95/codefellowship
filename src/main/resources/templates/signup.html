@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Auth App</title>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+</head>
+<body>
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">
+        <img src="https://mpng.subpng.com/20180703/yix/kisspng-lightweight-directory-access-protocol-computer-ico-authentication-protocol-5b3bc94719ac36.4341743315306448071052.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
+        First Auth App
+    </a>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/login">login</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/signup">Signup</a>
+        </li>
+    </ul>
+</nav>
+<div class="container">
+    <h2>SignUp</h2>
+    <form action="/signup" method="post">
+        <div class="form-group">
+            <label for="username">User Name:</label>
+            <input type="text" class="form-control" id="username" placeholder="Enter Username" name="username">
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" placeholder="Enter password" name="password">
+        </div>
+
+        <div class="form-group">
+            <label for="firstName">First Name:</label>
+            <input type="text" class="form-control" id="firstName" placeholder="Enter First Name" name="firstName">
+        </div>
+
+        <div class="form-group">
+            <label for="lastName">Last Name:</label>
+            <input type="text" class="form-control" id="lastName" placeholder="Enter Last Name" name="lastName">
+        </div>
+
+        <div class="form-group">
+            <label for="dateOfBirth">Date Of Birth:</label>
+            <input type="date" class="form-control" id="dateOfBirth" placeholder="Enter Date Of Birth " name="dateOfBirth">
+        </div>
+
+        <div class="form-group">
+            <label for="bio">Bio</label>
+            <textarea class="form-control" id="bio" rows="3" name="bio"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+
+<script th:src="@{/webjars/jquery/3.0.0/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/1.12.9-1/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js}"></script>
+</body>
+</html>
