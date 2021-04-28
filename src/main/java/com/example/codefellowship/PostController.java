@@ -21,6 +21,8 @@ public class PostController {
     ApplicationUserRepository applicationUserRepository;
 
 
+
+
     @PostMapping("/addPost")
     public RedirectView addPost(@RequestParam String body , Principal p){
 

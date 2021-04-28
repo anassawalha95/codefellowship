@@ -7,6 +7,35 @@
 </head>
 <body>
 
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">
+        <img src="https://mpng.subpng.com/20180703/yix/kisspng-lightweight-directory-access-protocol-computer-ico-authentication-protocol-5b3bc94719ac36.4341743315306448071052.jpg" width="30" height="30" class="d-inline-block align-top" alt="">
+        First Auth App
+    </a>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+        </li>
+        <li sec:authorize="!isAuthenticated()" class="nav-item">
+            <a class="nav-link" href="/login">login</a>
+        </li>
+        <li sec:authorize="!isAuthenticated()" class="nav-item">
+            <a class="nav-link" href="/signup">Signup</a>
+        </li>
+        <li sec:authorize="isAuthenticated()" class="nav-item">
+            <a class="nav-link" href="/users">All Users</a>
+        </li>
+        <li sec:authorize="isAuthenticated()" class="nav-item">
+            <a class="nav-link" th:href="@{|/users/${#authentication.principal.id}|}">User</a>
+        </li>
+        <li sec:authorize="isAuthenticated()" class="nav-item">
+            <a class="nav-link" href="/profile">Profile</a>
+        </li>
+        <li sec:authorize="isAuthenticated()" class="nav-item">
+            <a class="nav-link" href="/logout">Logout</a>
+        </li>
+    </ul>
+</nav>
 <div class="page-wrap d-flex flex-row align-items-center">
     <div class="container">
         <div class="row justify-content-center">

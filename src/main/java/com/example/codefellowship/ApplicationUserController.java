@@ -52,6 +52,8 @@ public class ApplicationUserController {
         return "index.html";
     }
 
+
+
     @GetMapping("/profile")
     public String profile(Model m, Principal p){
         ApplicationUser userDetails = (ApplicationUser) ((UsernamePasswordAuthenticationToken) p).getPrincipal();
@@ -89,6 +91,16 @@ public class ApplicationUserController {
         return "index.html";
     }
 
+
+    @GetMapping("/users")
+    public String allUsers(Model m, Principal p){
+
+
+        m.addAttribute("users", applicationUserRepository.findAll());
+        return "allUsers.html";
+    }
+
+
     @GetMapping("/users/{id}")
     public String users(@PathVariable(value = "id") int id , Model m){
 
@@ -118,6 +130,23 @@ public class ApplicationUserController {
         return new RedirectView("/profile");
 
     }
+
+    @GetMapping("/feed")
+    public String feed(){
+
+
+        return "/feed.html";
+    }
+
+
+    @PostMapping("/follow")
+    public RedirectView login(@RequestParam(value = "followUser") String followUser, Model m, Principal p){
+
+
+
+        return new RedirectView("/feed");
+    }
+
 
 
 

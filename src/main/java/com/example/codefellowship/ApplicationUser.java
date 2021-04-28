@@ -5,7 +5,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class ApplicationUser implements UserDetails {
@@ -25,6 +27,7 @@ public class ApplicationUser implements UserDetails {
     //empty constructor
     public ApplicationUser() {  }
 
+
     // parameterized constructor
     public ApplicationUser(String username, String password, String firstName, String lastName, String dateOfBirth, String bio) {
         this.username = username;
@@ -37,6 +40,32 @@ public class ApplicationUser implements UserDetails {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     List<Post> posts;
+
+
+    @ManyToOne(cascade={CascadeType.ALL})
+    @JoinColumn(name="user_id")
+    private ApplicationUser users;
+
+    public ApplicationUser getUsers() {
+        return users;
+    }
+
+    public void setUsers(ApplicationUser users) {
+        this.users = users;
+    }
+
+    public Set<ApplicationUser> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(Set<ApplicationUser> followers) {
+        this.followers = followers;
+    }
+
+    @OneToMany(mappedBy="users")
+    private Set<ApplicationUser> followers= new HashSet<ApplicationUser>();
+
+
 
     @Override
     public boolean isAccountNonExpired() {

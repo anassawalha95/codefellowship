@@ -24,6 +24,9 @@
             <a class="nav-link" href="/signup">Signup</a>
         </li>
         <li sec:authorize="isAuthenticated()" class="nav-item">
+            <a class="nav-link" href="/users">All Users</a>
+        </li>
+        <li sec:authorize="isAuthenticated()" class="nav-item">
             <a class="nav-link" th:href="@{|/users/${#authentication.principal.id}|}">User</a>
         </li>
         <li sec:authorize="isAuthenticated()" class="nav-item">
