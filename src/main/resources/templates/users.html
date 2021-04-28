@@ -25,6 +25,9 @@
             <a class="nav-link" href="/signup">Signup</a>
         </li>
         <li sec:authorize="isAuthenticated()" class="nav-item">
+            <a class="nav-link" href="/users">All Users</a>
+        </li>
+        <li sec:authorize="isAuthenticated()" class="nav-item">
             <a class="nav-link" th:href="@{|/users/${#authentication.principal.id}|}">User</a>
         </li>
         <li sec:authorize="isAuthenticated()" class="nav-item">
@@ -80,7 +83,9 @@
                                         <p class="m-b-10 f-w-600" >Bio:</p>
                                         <h6 class="text-muted f-w-400" th:text="${user.bio}"></h6>
                                     </div>
-
+                                    <div class="col-sm-12">
+                                        <a class="btn btn-primary pull-right" href="/users/5">Follow Me</a>
+                                    </div>
                                 </div>
 
 
