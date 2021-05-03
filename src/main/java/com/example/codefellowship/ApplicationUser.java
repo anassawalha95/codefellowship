@@ -38,32 +38,50 @@ public class ApplicationUser implements UserDetails {
         this.bio = bio;
     }
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     List<Post> posts;
 
 
-    @ManyToOne(cascade={CascadeType.ALL})
-    @JoinColumn(name="user_id")
-    private ApplicationUser users;
 
-    public ApplicationUser getUsers() {
+
+
+
+
+
+
+
+
+
+
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name="users_followers",
+            joinColumns={@JoinColumn(name="user_id")},
+            inverseJoinColumns={@JoinColumn(name="follower_id")}
+    )
+     Set <ApplicationUser> users=new HashSet<ApplicationUser>();
+
+
+
+    //////////////////////// setters and getters for the many to many relation ship
+    public Set<ApplicationUser> getUsers() {
         return users;
     }
 
-    public void setUsers(ApplicationUser users) {
+
+
+    public void setUsers(Set<ApplicationUser> users) {
         this.users = users;
     }
 
-    public Set<ApplicationUser> getFollowers() {
-        return followers;
-    }
+    ///////////////////////////////
 
-    public void setFollowers(Set<ApplicationUser> followers) {
-        this.followers = followers;
-    }
 
-    @OneToMany(mappedBy="users")
-    private Set<ApplicationUser> followers= new HashSet<ApplicationUser>();
+
+
+
+
+
 
 
 
@@ -125,6 +143,8 @@ public class ApplicationUser implements UserDetails {
     public String getFirstName() {
         return firstName;
     }
+
+
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;

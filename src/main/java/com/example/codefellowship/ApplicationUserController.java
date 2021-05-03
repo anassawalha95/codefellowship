@@ -14,6 +14,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Set;
 
 @Controller
 public class ApplicationUserController {
@@ -132,19 +133,35 @@ public class ApplicationUserController {
     }
 
     @GetMapping("/feed")
-    public String feed(){
 
+    public String feed(Model m, Principal p){
 
+        ApplicationUser loggedInUserId=((ApplicationUser) ((UsernamePasswordAuthenticationToken) p).getPrincipal());
+
+        m.addAttribute("allUsers", loggedInUserId);
         return "/feed.html";
     }
 
 
     @PostMapping("/follow")
-    public RedirectView login(@RequestParam(value = "followUser") String followUser, Model m, Principal p){
+    public RedirectView follow(@RequestParam(value = "followerId") Integer followerId, Model m, Principal p){
+
+        ApplicationUser loggedInUser= (ApplicationUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        ApplicationUser follower = applicationUserRepository.getOne(followerId);
 
 
+        if(!loggedInUser.getUsers().contains(follower) &&  loggedInUser.getId() != follower.getId() ){
+//            Set<ApplicationUser> x= loggedInUser.getUsers();
+//            x.add(follower);
+            loggedInUser.users.add(follower);
+            applicationUserRepository.save(loggedInUser);
 
-        return new RedirectView("/feed");
+
+        }
+
+
+        return new RedirectView("/users");
     }
 
 

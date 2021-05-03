@@ -5,13 +5,6 @@
     <title>Auth App</title>
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
     <style>
-        body{
-    margin-top:20px;
-    background:#FAFAFA;
-}
-/*==================================================
-  Nearby People CSS
-  ==================================================*/
 
 .people-nearby .google-maps{
   background: #f8f8f8;
@@ -67,6 +60,9 @@ img.profile-photo-lg{
             <a class="nav-link" href="/profile">Profile</a>
         </li>
         <li sec:authorize="isAuthenticated()" class="nav-item">
+            <a class="nav-link" href="/feed">Users Feed</a>
+        </li>
+        <li sec:authorize="isAuthenticated()" class="nav-item">
             <a class="nav-link" href="/logout">Logout</a>
         </li>
     </ul>
@@ -74,23 +70,20 @@ img.profile-photo-lg{
 <div class="container">
 
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <h3>All Users</h3>
             <div class="people-nearby">
-                <div class="nearby-user" th:each="user: ${users}">
-                    <div class="row">
+                <div class="nearby-user" th:each="user: ${users}"  th:if="${user.id != #authentication.principal.id}" >
+                    <div class="row" >
                         <div class="col-md-2 col-sm-2">
                             <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user" class="profile-photo-lg">
                         </div>
                         <div class="col-md-7 col-sm-7">
                             <h5 th:text="@{|${user.firstName} ${user.lastName}|}"></h5>
-                            <p th:text="${user.bio}">Software Engineer</p>
+                            <p th:text="${user.bio}"></p>
                         </div>
                         <div class="col-md-3 col-sm-3">
-                            <form action="/follow" method="post"> <!-- th:if="${shouldShowFollow}" -->
-                                <input type="hidden" name="followUser" th:value="${user.id}">
-                                <input class="button" type="submit" value="Follow Me!" />
-                            </form>
+                            <a class="btn btn-primary"  th:href="@{| /users/${user.id}|}" />View Details</a>
                         </div>
                     </div>
                 </div>
